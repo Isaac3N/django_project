@@ -20,6 +20,8 @@ sqlparse = "==0.4.2"
 toml = "==0.10.2"
 virtualenv = "==20.15.1"
 virtualenv-clone = "==0.5.7"
+psycopg2-binary = "*"
+django-environ = "*"
 
 [dev-packages]
 
