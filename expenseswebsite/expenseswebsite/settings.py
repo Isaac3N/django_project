@@ -16,6 +16,9 @@ from pathlib import Path
 
 import os
 
+import django_on_heroku
+
+
 import environ
 
 
@@ -138,6 +141,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "expenseswebsite/static")]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+django_on_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
