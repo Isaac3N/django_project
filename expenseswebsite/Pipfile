@@ -24,6 +24,7 @@ psycopg2-binary = "*"
 django-environ = "*"
 django-on-heroku = "*"
 gunicorn = "*"
+validate-email = "*"
 
 [dev-packages]
 

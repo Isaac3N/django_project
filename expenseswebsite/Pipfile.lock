@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5052467b92ceb1f7b26ce6fbae4ea793976ddb548fbecface257dbb0704a4750"
+            "sha256": "5234b39dffd8bed212f2d3c5359f33b58d9a48e0422f95f9d0eff36f55ac200e"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -207,11 +207,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:16923d366ced322712c71ccb97164d07472abeecd13f3a6c283f6d5d26722793",
-                "sha256:db3b8e2f922b2a910a29804776c643ea609badb6a32c4bcc226fd4fd902cce65"
+                "sha256:0d33c374d41c7863419fc8f6c10bfe25b7b498aa34164d135c622e52580c6b16",
+                "sha256:c04b44a57a6265fe34a4a444e965884716d34bae963119a76353434d6f18e450"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==63.1.0"
+            "version": "==63.2.0"
         },
         "six": {
             "hashes": [
@@ -236,6 +236,13 @@
             ],
             "index": "pypi",
             "version": "==0.10.2"
+        },
+        "validate-email": {
+            "hashes": [
+                "sha256:784719dc5f780be319cdd185dc85dd93afebdb6ebb943811bc4c7c5f9c72aeaf"
+            ],
+            "index": "pypi",
+            "version": "==1.3"
         },
         "virtualenv": {
             "hashes": [
