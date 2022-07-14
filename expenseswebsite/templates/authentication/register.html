@@ -29,10 +29,10 @@
           </div>
 
 
-          <div class="invalid_feedback invalid-feedback" style="display:none">
+          <div class="invalid_feedback invalid-feedback " style="display:none">
+            <p class="text-sm text-success usernameSuccessOutput"></p>
           </div>
-          <p class="text-sm text-success usernameSuccessOutput"></p>
-          <div class="form-group">
+          <div class="form-group py-3 ">
             <input
               type="email"
               name="email"
@@ -46,7 +46,7 @@
 
           <div class="emailFeedBackArea invalid-feedback" style="display:none">
           </div>
-          <div class="form-group py-3" >
+          <div class="form-group" >
             <input
               type="password"
               name="password"
@@ -54,7 +54,7 @@
               class="form-control form-control-sm"
               id="passwordField"
             />
-            <small class="float-right py-3 showPasswordToggle">SHOW</small>
+            <small class="float-right showPasswordToggle py-3">SHOW</small>
           </div>
           <input type="submit" value="Register" class="btn btn-block btn-primary submit-btn" />
         </form>
@@ -66,6 +66,8 @@
   </div>
   <div class="col-md-4"></div>
 </div>
+
+<script src="{% static 'js/register.js' %}"></script>
 
 
 
