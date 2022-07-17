@@ -25,6 +25,8 @@ django-environ = "*"
 django-on-heroku = "*"
 gunicorn = "*"
 validate-email = "*"
+django-dotenv = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

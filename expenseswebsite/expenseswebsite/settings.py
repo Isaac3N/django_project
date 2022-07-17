@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 
+from ast import Str
+from django.contrib import messages
 from pathlib import Path
 
 
@@ -18,10 +20,9 @@ import os
 
 import django_on_heroku
 
+from dotenv import load_dotenv
 
-import environ
-
-from django.contrib import messages
+load_dotenv()  # loads the configs from .env
 
 
 # Set the project base directory
@@ -32,12 +33,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-env = environ.Env()
-# reading .env file
-environ.Env.read_env()
+
 
 # Raises django's ImproperlyConfigured exception if SECRET_KEY not in os.environ
-SECRET_KEY = env("SECRET_KEY", default="unsafe-secret-key")
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -95,9 +94,9 @@ WSGI_APPLICATION = 'expenseswebsite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("DB_NAME"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_USER_PASSWORD"),
+        'NAME': str(os.getenv("DB_NAME")),
+        'USER': str(os.getenv("DB_USER")),
+        'PASSWORD': str(os.getenv("DB_USER_PASSWORD")),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -154,3 +153,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_TAGS = {
     messages.ERROR: "danger"
 }
+
+
+# email stuff
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = str(os.environ.get("EMAIL_HOST"))
+EMAIL_HOST_USER = str(os.environ.get("EMAIL_HOST_USER"))
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = str(os.environ.get("EMAIL_HOST_USER"))
+EMAIL_PORT = 587
+EMAIL_HOST_PASSWORD = str(os.environ.get("EMAIL_HOST_PASSWORD"))
