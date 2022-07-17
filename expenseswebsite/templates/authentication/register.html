@@ -14,9 +14,14 @@
         <div class="card-title py-3">
           <h4>Register for a free account</h4>
         </div>
-        <form action="{% url 'register' %}" method="post">
-          {% csrf_token %}
 
+        
+
+        <form action="{% url 'register' %}" method="post">
+          {% comment %} Add this to every form made {% endcomment %}
+          {% csrf_token %} 
+
+          {% include "partials/_messages.html" %}
           <div class="form-group">
             <input
               type="text"
