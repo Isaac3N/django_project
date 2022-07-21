@@ -1,4 +1,13 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="{% url "expenses"%}">Expenses</a></li>
+		<li class="breadcrumb-item active" aria-current="page">Add Expenses</li>
+	</ol>
+</nav>
+
+{% block content %}
 <h1>Add expense</h1>
 
 {% endblock content %}
