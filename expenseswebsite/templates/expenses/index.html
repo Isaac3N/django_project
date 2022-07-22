@@ -35,6 +35,8 @@
 				<th>
 					Date
 				</th>
+				<th>
+				</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -51,6 +53,10 @@
 				</td>
 				<td>
 					{{expense.date}}
+				</td>
+
+				<td>
+					<a href="{% url 'expense-edit' expense.id %}" class="btn btn-secondary btn-sm">Edit</a>
 				</td>
 			</tr>
 			{% endfor %}
