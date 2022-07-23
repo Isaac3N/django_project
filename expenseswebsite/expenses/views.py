@@ -3,8 +3,22 @@ from django.contrib.auth.decorators import login_required
 from . models import *
 from django.contrib import messages
 from django.core.paginator import Paginator
+import json
+from django.http import JsonResponse
 
 # Create your views here.
+
+
+def search_expenses(request):
+    if request.method == 'POST':
+        search_str = json.loads(request.body).get('searchText')
+        expenses = Expense.objects.filter(
+            amount__istartswith=search_str, owner=request.user) | Expense.objects.filter(
+            date__istartswith=search_str, owner=request.user) | Expense.objects.filter(
+            description__icontains=search_str, owner=request.user) | Expense.objects.filter(
+            category__icontains=search_str, owner=request.user)
+        data = expenses.values()
+        return JsonResponse(list(data), safe=False)
 
 
 @login_required(login_url="/authentication/login")
