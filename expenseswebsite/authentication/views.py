@@ -16,6 +16,8 @@ from django.contrib.sites.shortcuts import get_current_site
 from .utils import token_generator
 from django.contrib import auth
 
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+
 
 # Create your views here.
 
@@ -159,3 +161,59 @@ class LogoutView(View):
         auth.logout(request)
         messages.success(request, 'You have been logged out')
         return redirect('login')
+
+
+class RequestPasswordResetEmail(View):
+    def get(self, request):
+        return render(request, "authentication/reset-password.html")
+
+    def post(self, request):
+        email = request.POST['email']
+
+        context = {
+            "values": request.POST
+        }
+
+        if not validate_email(email):
+            messages.error(request, "Please supply a valid email")
+            return render(request, "authentication/reset-password.html", context)
+
+        current_site = get_current_site(request)
+
+        user = User.objects.filter(email=email)
+
+        if user.exists():
+            email_contents = {
+                'user': user[0],
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user[0].pk)),
+                'token': PasswordResetTokenGenerator().make_token(user[0]),
+            }
+
+            link = reverse('reset-user-password', kwargs={
+                'uidb64': email_contents['uid'], 'token': email_contents['token']})
+
+            email_subject = 'Password Reset Instructions'
+
+            reset_url = 'http://'+current_site.domain+link
+
+            email = EmailMessage(
+                email_subject,
+                'Hi there, Please the link below to activate your password \n'+reset_url,
+                'noreply@semycolon.com',
+                [email],
+            )
+            email.send(fail_silently=False)
+
+        messages.success(
+            request, "We have sent you an email to reset your password")
+
+        return render(request, "authentication/reset-password.html")
+
+
+class CompletePasswordReset(View):
+    def get(self, request, uidb64, token):
+        return render(request, "authentication/set-new-password.html")
+
+    def post(self, request, uidb64, token):
+        return render(request, "authentication/set-new-password.html")
